@@ -1,6 +1,7 @@
 #ifndef USER_H
 #define USER_H
 
+#include<iostream>
 #include<string>
 #include"radix62.h"
 
@@ -31,7 +32,7 @@ public:
 	void set_authority(const authority_type au);//this function can only be used by users with higher authorities, but we don't ensure that in this function, so be careful when use this function.
 	
 	bool operator==(const user &u);//compare the user_number in two instances
-	std::ostream& operator<<(std::ostream &);
+	friend std::ostream& operator<<(std::ostream &os,const user &u);
 	//To avoid the case that user_number be modified or something like that happenning, don't offer the overriding for operator '>>'
 private:
 	std::string user_name;

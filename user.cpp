@@ -1,3 +1,4 @@
+#include<iostream>
 #include"user.h"
 
 //define for member functions in the class user
@@ -44,13 +45,15 @@ bool user::operator==(const user &u)
 		return false;
 }
 
-std::ostream& user::operator<<(std::ostream &os)
+std::ostream& operator<<(std::ostream &os,const user &u)
 {
-	os
-	<<user_name<<std::endl
-	<<user_number<<std::endl
-	<<keyword<<std::endl;
-	switch(authority)
+	os<<u.get_user_name();
+	os<<std::endl;
+	os<<u.get_user_number();
+	os<<std::endl;
+	os<<u.get_keyword();
+	os<<std::endl;
+	switch(u.get_authority())
 	{
 	case SystemAdministrator:
 		os<<"SystemAdministrator"<<std::endl;

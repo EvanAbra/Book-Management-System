@@ -1,3 +1,4 @@
+#include<iostream>
 #include"Info.h"
 #include<string>
 
@@ -13,37 +14,42 @@ void info::set_BookName(const string name)
 	BookName=name;
 }
 
-string info::get_writer() const;
+string info::get_writer() const
 {
 	return writer;
 }
 
-void set_writer(const string w)
+void info::set_writer(const string w)
 {
 	writer=w;
 }
 
-int get_ISBN() const
+int info::get_ISBN() const
 {
 	return ISBN;
 }
 
-void set_ISBN(const int isbn)
+void info::set_ISBN(const int isbn)
 {
 	ISBN=isbn;
 }
 
 bool info::operator==(const info &i2)//return true if the ISBN of two info's are equal
 {
-	ISBN==i2.get_ISBN()?return true:return false;
+	if(ISBN==i2.get_ISBN())
+		return true;
+	else
+		return false;
 }
 
 ostream& operator<<(ostream &os,const info &i)
 {
-	os
-	<<i.get_BookName()<<endl
-	<<i.get_writer()<<endl
-	<<i.get_ISBN()<<endl;
+	os<<i.get_BookName();
+	os<<std::endl;
+	os<<i.get_writer();
+	os<<std::endl;
+	os<<i.get_ISBN();
+	os<<std::endl;
 	
 	return os;
 }
@@ -52,7 +58,9 @@ istream& operator>>(istream &is,info &i)
 {
 	string bn,w;//BookName,writer
 	int isbn;//ISBN
-	is>>bn>>w>>isbn;
+	is>>bn;
+	is>>w;
+	is>>isbn;
 	i.set_BookName(bn);
 	i.set_writer(w);
 	i.set_ISBN(isbn);
@@ -60,22 +68,22 @@ istream& operator>>(istream &is,info &i)
 }
 
 //member function for class record
-int record::get_borrow_time() const
+string record::get_borrow_time() const
 {
 	return borrow_time;
 }
 
-void record::set_borrow_time(const int borrow_t)
+void record::set_borrow_time(const string borrow_t)
 {
 	borrow_time=borrow_t;
 }
 
-int reccord::get_user_number() const
+int record::get_user_number() const
 {
 	return user_number;
 }
 
-void reccord::set_user_number(const int user_n)
+void record::set_user_number(const int user_n)
 {
 	user_number=user_n;
 }
@@ -90,34 +98,41 @@ void record::set_ISBN(const int isbn)
 	ISBN=isbn;
 }
 
-bool get_if_return() const
+bool record::get_if_return() const
 {
 	return if_return;
 }
 
-void return_the_book()
+void record::return_the_book()
 {
 	if_return=true;
 }
 
 ostream& operator<<(ostream &os,const record &r)
 {
-	os
-	<<borrow_time<<endl
-	<<user_number<<endl
-	<<ISBN<<endl;
-	if(if_return)
-		os<<"already returned"<<endl;
+	std::string s1="already returned",s2="still not returned";
+	os<<r.get_borrow_time();
+	os<<std::endl;
+	os<<r.get_user_number();
+	os<<std::endl;
+	os<<r.get_ISBN();
+	os<<std::endl;
+	if(r.get_if_return())	
+		os<<s1<<std::endl;
 	else
-		os<<"still not returned"<<endl;
+		os<<s2<<std::endl;
 	return os;
 }
 
 istream& operator>>(istream &is,record &r)
 {
-	int b_t,u_n,isbn;//borrow_time,user_number,ISBN
+	string b_t;
+	int u_n,isbn;//borrow_time,user_number,ISBN
 	string reminder;//"already returned" or "still not returned"
-	is>>b_t>>user_number>>ISBN>>reminder;
+	is>>b_t;
+	is>>u_n;
+	is>>isbn;
+	is>>reminder;
 	r.set_borrow_time(b_t);
 	r.set_user_number(u_n);
 	r.set_ISBN(isbn);

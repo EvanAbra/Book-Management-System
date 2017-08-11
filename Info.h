@@ -16,6 +16,12 @@ public:
 		writer=w;
 		ISBN=isbn;
 	}
+	info()
+	{
+		BookName="暂无";
+		writer="暂无";
+		ISBN=0;
+	}
 
 	std::string get_BookName() const;
 	void set_BookName(const std::string name);
@@ -32,21 +38,28 @@ public:
 class record
 {
 private:
-	int borrow_time;
+	std::string borrow_time;
 	int user_number;
 	int ISBN;
 	bool if_return;
 public:
-	record(int borrow_t,int user_n,int isbn)
+	record(std::string borrow_t,int user_n,int isbn)
 	{
 		borrow_time=borrow_t;
 		user_number=user_n;
 		ISBN=isbn;
 		if_return=false;
 	}
+	record()
+	{
+		borrow_time="unknown";
+		user_number=0;
+		ISBN=0;
+		if_return=false;
+	}
 	
-	int get_borrow_time() const;
-	void set_borrow_time(const int borrow_t);
+	std::string get_borrow_time() const;
+	void set_borrow_time(const std::string borrow_t);
 	int get_user_number() const;
 	void set_user_number(const int user_n);
 	int get_ISBN() const;
